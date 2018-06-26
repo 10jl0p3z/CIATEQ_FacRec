@@ -1,0 +1,19 @@
+#Internal package file, do not edit.
+#Tue Jun 26 00:37:23 CDT 2018
+1.base=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\assets\\debug
+2.path=_graph.pb
+0.baseType=DIRECTORY
+3.baseType=DIRECTORY
+2.base=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\assets\\debug
+3.set=ASSET
+2.set=ASSET
+1.baseType=DIRECTORY
+3.path=graph.pb
+count=4
+1.set=ASSET
+0.path=labels.txt
+3.base=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\assets\\debug
+0.set=ASSET
+0.base=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\assets\\debug
+2.baseType=DIRECTORY
+1.path=_labels.txt

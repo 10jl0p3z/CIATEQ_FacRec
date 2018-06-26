@@ -16,6 +16,8 @@
 
 package com.example.facrec;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -26,11 +28,16 @@ import android.media.Image;
 import android.media.Image.Plane;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
+
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Vector;
 
@@ -113,9 +120,13 @@ public class FacialRecognition extends CameraActivity  implements OnImageAvailab
 
     private long lastProcessingTimeMs;
 
-
+    private Handler handler;
+    private HandlerThread handlerThread;
 
     private static final float TEXT_SIZE_DIP = 10;
+    private static int INT_TAKE_PHOTO = 2;
+
+    Bitmap bmp;
 
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
@@ -239,5 +250,49 @@ public class FacialRecognition extends CameraActivity  implements OnImageAvailab
         Trace.endSection();
     }
 
+    protected synchronized void runInBackground(final Runnable r) {
+        if (handler != null) {
+            handler.post(r);
+        }
+    }
 
+    protected void fillBytes(final Plane[] planes, final byte[][] yuvBytes) {
+        // Because of the variable row stride it's not possible to know in
+        // advance the actual necessary dimensions of the yuv planes.
+        for (int i = 0; i < planes.length; ++i) {
+            final ByteBuffer buffer = planes[i].getBuffer();
+            if (yuvBytes[i] == null) {
+                //LOGGER.d("Initializing buffer %d at size %d", i, buffer.capacity());
+                yuvBytes[i] = new byte[buffer.capacity()];
+            }
+            buffer.get(yuvBytes[i]);
+        }
+    }
+    final static int cons= 0;
+    public void CameraInit() {
+        //LOGGER.d("onCreate " + this);
+        //super.onCreate(null);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        //setContentView(R.layout.activity_camera);
+
+        Intent cameraIntent =  new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent,cons);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        //super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == INT_TAKE_PHOTO) {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                Bundle ext= data.getExtras();
+                bmp = (Bitmap) ext.get("data");
+                //img.setImageBitmap(bmp);
+            }
+        }
+
+    }
 }

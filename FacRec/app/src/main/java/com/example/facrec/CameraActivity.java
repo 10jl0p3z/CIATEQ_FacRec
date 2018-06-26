@@ -38,38 +38,15 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
 
   private boolean debug = false;
 
-  private Handler handler;
-  private HandlerThread handlerThread;
-
-   public void CameraInit() {
-    //LOGGER.d("onCreate " + this);
-    //super.onCreate(null);
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-    //setContentView(R.layout.activity_camera);
-
-  }
 
 
-  protected synchronized void runInBackground(final Runnable r) {
-    if (handler != null) {
-      handler.post(r);
-    }
-  }
 
 
-  protected void fillBytes(final Plane[] planes, final byte[][] yuvBytes) {
-    // Because of the variable row stride it's not possible to know in
-    // advance the actual necessary dimensions of the yuv planes.
-    for (int i = 0; i < planes.length; ++i) {
-      final ByteBuffer buffer = planes[i].getBuffer();
-      if (yuvBytes[i] == null) {
-        LOGGER.d("Initializing buffer %d at size %d", i, buffer.capacity());
-        yuvBytes[i] = new byte[buffer.capacity()];
-      }
-      buffer.get(yuvBytes[i]);
-    }
-  }
+
+
+
+
+
 
 
   protected abstract void onPreviewSizeChosen(final Size size, final int rotation);

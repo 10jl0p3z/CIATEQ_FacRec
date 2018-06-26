@@ -1,15 +1,23 @@
 package com.example.facrec;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Size;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     File SelectedFile = null;
     String CurrentFileName = null;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }
         initTextToSpeech();
 
+
         btnOpenDialog = (Button) findViewById(R.id.opendialog);
         btnOpenDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         root = new File(ProtectedDirectory);
         //root = new File(ProtectedDirectory);
         curFolder = root;
+        Init_TF();
     }
 
     @Override
@@ -158,13 +169,16 @@ public class MainActivity extends AppCompatActivity {
         lstviewDialog.setAdapter(directoryList);
     }
     private static int TTS_DATA_CHECK = 1;
+    private static int TTS_TAKE_PHOTO = 2;
     private TextToSpeech tts = null;
     private boolean ttsIsInit = false;
+    Bitmap bmp;
     private void initTextToSpeech() {
         Intent intent = new Intent(Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, TTS_DATA_CHECK);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == TTS_DATA_CHECK) {
             if (resultCode == Engine.CHECK_VOICE_DATA_PASS) {
                 tts = new TextToSpeech(this, new OnInitListener() {
@@ -184,7 +198,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent installVoice = new Intent(Engine.ACTION_INSTALL_TTS_DATA);
                 startActivity(installVoice);
             }
+        }else if (requestCode == TTS_TAKE_PHOTO){
+            if (resultCode == Activity.RESULT_OK)
+            {
+                //img = (ImageView) findViewById(R.id.UserImg);
+                Bundle ext= data.getExtras();
+                bmp = (Bitmap) ext.get("data");
+                //img.setImageBitmap(bmp);
+                //img.setImageBitmap(bmp);
+                final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(bmp);
+
+                if (results.get(0).getConfidence() > 0.8){
+                    ProcesResults(results.get(0).getTitle());
+                }
+                else{
+                    ProcesResults("Intruder");
+                }
+
+                //speak("foto");
+            }
         }
+        else{}
 
     }
     private void speak(String myText) {
@@ -226,8 +260,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // call here the identification process
-                        ProcesResults();
+                        //ProcesResults();
                         //CameraActivity.CameraInit();
+                        //FacialRecognition mytest = new FacialRecognition();
+                        //mytest.CameraInit();
+                        Intent cameraIntent =  new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent,TTS_TAKE_PHOTO);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -252,8 +290,8 @@ public class MainActivity extends AppCompatActivity {
         return myperson;
     }
 
-    private void ProcesResults (){
-        String autres = "Joel";
+    private void ProcesResults (String autres){
+        //String autres = "Joel";
 
         if (CurrentFileName.equalsIgnoreCase(autres)){
             speak("Bienvenido "+CurrentFileName);
@@ -267,6 +305,74 @@ public class MainActivity extends AppCompatActivity {
             speak(autres);
             speak("No tienes permisos para acceder a esta ubicacion");
         }
+    }
+    private org.tensorflow.demo.Classifier classifier;
+    private static final int INPUT_SIZE = 224;
+    private static final int IMAGE_MEAN = 128;
+    private static final float IMAGE_STD = 128.0f;
+    private static final String INPUT_NAME = "input";
+    //private static final String OUTPUT_NAME = "MobilenetV1/Predictions/Softmax";
+    private static final String OUTPUT_NAME = "final_result";
+
+    private static final String MODEL_FILE = "file:///android_asset/graph.pb";
+    private static final String LABEL_FILE = "file:///android_asset/labels.txt";
+
+    private static final boolean SAVE_PREVIEW_BITMAP = false;
+
+    private static final boolean MAINTAIN_ASPECT = true;
+
+    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+
+    private int previewWidth = 0;
+    private int previewHeight = 0;
+    private byte[][] yuvBytes;
+    private int[] rgbBytes = null;
+    private Bitmap rgbFrameBitmap = null;
+    private Bitmap croppedBitmap = null;
+    private Matrix frameToCropTransform;
+    private Matrix cropToFrameTransform;
+
+    public void Init_TF() {
+
+        classifier =
+                org.tensorflow.demo.TensorFlowImageClassifier.create(
+                        getAssets(),
+                        MODEL_FILE,
+                        LABEL_FILE,
+                        INPUT_SIZE,
+                        IMAGE_MEAN,
+                        IMAGE_STD,
+                        INPUT_NAME,
+                        OUTPUT_NAME);
+
+        //resultsView = (org.tensorflow.demo.ResultsView) findViewById(R.id.results);
+        //previewWidth = size.getWidth();
+        //previewHeight = size.getHeight();
+
+        //final Display display = getWindowManager().getDefaultDisplay();
+        //final int screenOrientation = display.getRotation();
+
+        //LOGGER.i("Sensor orientation: %d, Screen orientation: %d", rotation, screenOrientation);
+
+        //sensorOrientation = rotation + screenOrientation;
+
+        //LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
+        //rgbBytes = new int[previewWidth * previewHeight];
+        //rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
+        //croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
+
+       /* frameToCropTransform =
+                org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
+                        previewWidth, previewHeight,
+                        INPUT_SIZE, INPUT_SIZE,
+                        sensorOrientation, MAINTAIN_ASPECT);*/
+
+        //cropToFrameTransform = new Matrix();
+        //frameToCropTransform.invert(cropToFrameTransform);
+
+        yuvBytes = new byte[3][];
+
+
     }
 }
 
