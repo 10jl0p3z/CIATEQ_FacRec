@@ -1,0 +1,128 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\b2c21a5a581b588cb5cd4bcaa3f8295e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\847c31babda8eee028ffb7a14b13ac76\AndroidManifest.xml:2:1-11:12
+MERGED from [org.tensorflow:tensorflow-android:1.8.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.8.0.aar\c79d97a82b08631fd16f5bda063750c5\AndroidManifest.xml:2:1-8:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2e2bee22899c6f1f237fac9bdf0fae3d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4b4a99defb6a75ee9fac765a123442b1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\ac75d887103d412969f3c5dc13a94e3f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\7b698eb3aa6bc3663aa7ad8b5b6d068d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\f09ff2af09474f395962b99c353e24a9\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\2a591938bcc20b0cc9391e52b3ce5c2d\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\02369f1c06fc7ff6c85cd46494419a9b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\dc96b1c2d4f6a92c3d7651eca97464b4\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\bd375dcc6631d1f8cf0e501f3734702f\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\d5365a2aea3a6f76079abd615ceeca92\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+	package
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:3:5-33
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:5:22-62
+uses-feature#android.hardware.camera
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:6:5-60
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:6:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:7:5-70
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:7:19-67
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:8:5-80
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:8:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:9:22-78
+application
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:11:5-25:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\847c31babda8eee028ffb7a14b13ac76\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\847c31babda8eee028ffb7a14b13ac76\AndroidManifest.xml:9:5-20
+MERGED from [org.tensorflow:tensorflow-android:1.8.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.8.0.aar\c79d97a82b08631fd16f5bda063750c5\AndroidManifest.xml:5:5-6:19
+MERGED from [org.tensorflow:tensorflow-android:1.8.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\tensorflow-android-1.8.0.aar\c79d97a82b08631fd16f5bda063750c5\AndroidManifest.xml:5:5-6:19
+	android:supportsRtl
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:16:9-35
+	android:label
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:14:9-41
+	android:roundIcon
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:15:9-54
+	android:icon
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:13:9-43
+	android:allowBackup
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:12:9-35
+	android:theme
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:17:9-40
+activity#com.example.facrec.MainActivity
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:18:9-24:20
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:18:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:19:13-23:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:22:17-77
+	android:name
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:22:27-74
+uses-sdk
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\b2c21a5a581b588cb5cd4bcaa3f8295e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\b2c21a5a581b588cb5cd4bcaa3f8295e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\847c31babda8eee028ffb7a14b13ac76\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\847c31babda8eee028ffb7a14b13ac76\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2e2bee22899c6f1f237fac9bdf0fae3d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\2e2bee22899c6f1f237fac9bdf0fae3d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4b4a99defb6a75ee9fac765a123442b1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\4b4a99defb6a75ee9fac765a123442b1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\ac75d887103d412969f3c5dc13a94e3f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\ac75d887103d412969f3c5dc13a94e3f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\7b698eb3aa6bc3663aa7ad8b5b6d068d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\7b698eb3aa6bc3663aa7ad8b5b6d068d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\f09ff2af09474f395962b99c353e24a9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\f09ff2af09474f395962b99c353e24a9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\2a591938bcc20b0cc9391e52b3ce5c2d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\2a591938bcc20b0cc9391e52b3ce5c2d\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\02369f1c06fc7ff6c85cd46494419a9b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\02369f1c06fc7ff6c85cd46494419a9b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\dc96b1c2d4f6a92c3d7651eca97464b4\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\dc96b1c2d4f6a92c3d7651eca97464b4\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\bd375dcc6631d1f8cf0e501f3734702f\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\bd375dcc6631d1f8cf0e501f3734702f\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\d5365a2aea3a6f76079abd615ceeca92\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\lopez\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\d5365a2aea3a6f76079abd615ceeca92\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:2:1-27:12 reason: tensorflow.contrib.android has a targetSdkVersion < 4
