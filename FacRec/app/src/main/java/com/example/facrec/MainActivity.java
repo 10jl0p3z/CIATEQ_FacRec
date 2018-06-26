@@ -98,10 +98,12 @@ public class MainActivity extends AppCompatActivity {
                 dialog.setCanceledOnTouchOutside(true);
 
                 txtFolder = (TextView) dialog.findViewById(R.id.folder);
+                img = (ImageView) dialog.findViewById(R.id.UserImg);
                 btnUp = (Button) dialog.findViewById(R.id.up);
                 btnUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        UnlockedFor = AllowedPeople.ANYBODY;
                         ListDir(curFolder.getParentFile());
 
                     }
@@ -201,14 +203,14 @@ public class MainActivity extends AppCompatActivity {
         }else if (requestCode == TTS_TAKE_PHOTO){
             if (resultCode == Activity.RESULT_OK)
             {
-                //img = (ImageView) findViewById(R.id.UserImg);
+
                 Bundle ext= data.getExtras();
                 bmp = (Bitmap) ext.get("data");
                 //img.setImageBitmap(bmp);
                 //img.setImageBitmap(bmp);
                 final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(bmp);
-
-                if (results.get(0).getConfidence() > 0.8){
+                img.setImageBitmap(bmp);
+                if (results.get(0).getConfidence() > 0.7){
                     ProcesResults(results.get(0).getTitle());
                 }
                 else{

@@ -7,22 +7,22 @@
     format="10"
     ir-eligibility="COMPATIBLE"
     plugin-version="3.1.2"
-    timestamp="1529992827659"
+    timestamp="1529995073777"
     token="-1619510592560474169"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="971" />
+        duration="1999" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="31" />
+        duration="262" />
     <task
         name="verifier"
-        duration="6" />
+        duration="42" />
 
     <artifact
         location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
@@ -76,7 +76,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1529992699666"
+        timestamp="1529994732821"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -85,7 +85,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1529992827659"
+        timestamp="1529995073777"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
