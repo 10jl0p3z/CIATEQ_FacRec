@@ -32,6 +32,7 @@ import java.nio.ByteBuffer;
  **/
 public class ImageUtils {
     @SuppressWarnings("unused")
+
     private static final Logger LOGGER = new Logger();
 
     // This value is 2 ^ 18 - 1, and is used to clamp the RGB values before their ranges
@@ -59,9 +60,11 @@ public class ImageUtils {
      *
      * @param bitmap The bitmap to save.
      */
+
     public static void saveBitmap(final Bitmap bitmap) {
+        String tmpImgPath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles/tmp";
         final String root =
-                Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow";
+                tmpImgPath2;
         LOGGER.i("Saving %dx%d bitmap to %s.", bitmap.getWidth(), bitmap.getHeight(), root);
         final File myDir = new File(root);
 

@@ -5,13 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Typeface;
+import android.hardware.Camera;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Size;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,12 +30,14 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.content.Intent;
+import android.net.Uri;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.lang.String;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     String KEY_TEXTPSS = "TEXTPSS";
     String ProtectedDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles";
+    String tmpImgPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles/tmp";
     static final int CUSTOM_DIALOG_ID = 0;
     ListView lstviewDialog;
     File root;
@@ -81,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         root = new File(ProtectedDirectory);
         //root = new File(ProtectedDirectory);
         curFolder = root;
+
         Init_TF();
     }
 
@@ -204,12 +209,31 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK)
             {
 
-                Bundle ext= data.getExtras();
-                bmp = (Bitmap) ext.get("data");
+                //Bundle ext= data.getExtras();
+                //bmp = (Bitmap) ext.get("data");
+                Bitmap test = BitmapFactory.decodeFile(ficheroSalidaUri.getPath());
+
+
+                previewWidth = test.getWidth();
+                previewHeight = test.getHeight();
+                sensorOrientation = getWindowManager().getDefaultDisplay().getRotation();
                 //img.setImageBitmap(bmp);
                 //img.setImageBitmap(bmp);
-                final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(bmp);
-                img.setImageBitmap(bmp);
+                final Canvas canvas = new Canvas(croppedBitmap);
+
+                frameToCropTransform =
+                        org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
+                                previewWidth, previewHeight,
+                                INPUT_SIZE, INPUT_SIZE,
+                                sensorOrientation, MAINTAIN_ASPECT);
+
+                cropToFrameTransform = new Matrix();
+                frameToCropTransform.invert(cropToFrameTransform);
+
+                canvas.drawBitmap(test, frameToCropTransform, null);
+                org.tensorflow.demo.env.ImageUtils.saveBitmap(croppedBitmap);
+                final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
+                img.setImageBitmap(croppedBitmap);
                 if (results.get(0).getConfidence() > 0.7){
                     ProcesResults(results.get(0).getTitle());
                 }
@@ -253,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         INTRUDER
 
     }
-
+    private Uri ficheroSalidaUri;
     private void StartAuthentification(){
         AlertDialog.Builder ContinueAuth = new AlertDialog.Builder(this);
         ContinueAuth.setMessage("Necesitas identificarte para acceder al contenido")
@@ -267,6 +291,9 @@ public class MainActivity extends AppCompatActivity {
                         //FacialRecognition mytest = new FacialRecognition();
                         //mytest.CameraInit();
                         Intent cameraIntent =  new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        File file = new File(tmpImgPath, "tmp.jpg");
+                        ficheroSalidaUri = Uri.fromFile(file);
+                        cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, ficheroSalidaUri);
                         startActivityForResult(cameraIntent,TTS_TAKE_PHOTO);
                     }
                 })
@@ -309,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private org.tensorflow.demo.Classifier classifier;
-    private static final int INPUT_SIZE = 224;
+    private static final int INPUT_SIZE = 250;
     private static final int IMAGE_MEAN = 128;
     private static final float IMAGE_STD = 128.0f;
     private static final String INPUT_NAME = "input";
@@ -361,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
         //LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
         //rgbBytes = new int[previewWidth * previewHeight];
         //rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
-        //croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
+        croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
 
        /* frameToCropTransform =
                 org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
@@ -376,5 +403,64 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private Integer sensorOrientation;
+
+
+    public void onPreviewSizeChosen_cbk(final Size size, final int rotation) {
+        /*final float textSizePx =
+                TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+        borderedText = new org.tensorflow.demo.env.BorderedText(textSizePx);
+        borderedText.setTypeface(Typeface.MONOSPACE);*/
+
+        classifier =
+                org.tensorflow.demo.TensorFlowImageClassifier.create(
+                        getAssets(),
+                        MODEL_FILE,
+                        LABEL_FILE,
+                        INPUT_SIZE,
+                        IMAGE_MEAN,
+                        IMAGE_STD,
+                        INPUT_NAME,
+                        OUTPUT_NAME);
+
+        //resultsView = (org.tensorflow.demo.ResultsView) findViewById(R.id.results);
+
+        previewWidth = size.getWidth();
+        previewHeight = size.getHeight();
+
+        final Display display = getWindowManager().getDefaultDisplay();
+        final int screenOrientation = display.getRotation();
+
+        //LOGGER.i("Sensor orientation: %d, Screen orientation: %d", rotation, screenOrientation);
+
+        sensorOrientation = rotation + screenOrientation;
+
+        //LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
+        rgbBytes = new int[previewWidth * previewHeight];
+        rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
+        croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
+
+        frameToCropTransform =
+                org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
+                        previewWidth, previewHeight,
+                        INPUT_SIZE, INPUT_SIZE,
+                        sensorOrientation, MAINTAIN_ASPECT);
+
+        cropToFrameTransform = new Matrix();
+        frameToCropTransform.invert(cropToFrameTransform);
+
+        yuvBytes = new byte[3][];
+
+        /*addCallback(
+                new OverlayView.DrawCallback() {
+                    @Override
+                    public void drawCallback(final Canvas canvas) {
+                        renderDebug(canvas);
+                    }
+                });*/
+    }
+
+
 }
 
