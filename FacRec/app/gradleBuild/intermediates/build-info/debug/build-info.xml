@@ -5,25 +5,39 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
-    ir-eligibility="METHOD_ADDED"
     plugin-version="3.1.2"
-    timestamp="1530251178154"
+    timestamp="1530258921949"
     token="-1619510592560474169"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="R_CLASS_CHANGE" >
 
     <task
         name="javac"
-        duration="12054" />
+        duration="2053" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1076" />
+        duration="119" />
     <task
         name="verifier"
-        duration="913" />
+        duration="117" />
 
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_8.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_3.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_2.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_0.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_7.apk"
+        type="SPLIT" />
     <artifact
         location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
         type="SPLIT" />
@@ -33,25 +47,28 @@
 
     <build
         build-mode="FULL"
-        timestamp="1530248522519"
+        timestamp="1530255320846"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_6.apk"
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\dep\dependencies.apk"
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_0.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_1.apk"
-            type="SPLIT" />
-        <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_7.apk"
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_1.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_4.apk"
@@ -60,13 +77,10 @@
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_9.apk"
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_3.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_8.apk"
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -74,9 +88,23 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="METHOD_ADDED"
-        timestamp="1530251178154"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="1530258921949"
+        verifier="R_CLASS_CHANGE" >
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />

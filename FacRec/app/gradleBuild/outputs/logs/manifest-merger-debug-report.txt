@@ -63,11 +63,11 @@ MERGED from [org.tensorflow:tensorflow-android:1.8.0] C:\Users\lopez\.gradle\cac
 	android:supportsRtl
 		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:14:9-41
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:14:9-47
 	android:roundIcon
-		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:15:9-54
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:15:9-59
 	android:icon
-		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:13:9-43
+		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:13:9-48
 	android:allowBackup
 		ADDED from C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme

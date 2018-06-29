@@ -1,4 +1,4 @@
-#Thu Jun 28 01:44:15 CDT 2018
-base.0=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\transforms\\dexMerger\\debug\\54
+#Fri Jun 29 02:55:39 CDT 2018
+base.0=C\:\\Users\\lopez\\OneDrive\\Documentos\\GitHub\\CIATEQ_FacRec\\FacRec\\app\\gradleBuild\\intermediates\\transforms\\dexMerger\\debug\\71
 path.0=classes.dex
 renamed.0=classes.dex

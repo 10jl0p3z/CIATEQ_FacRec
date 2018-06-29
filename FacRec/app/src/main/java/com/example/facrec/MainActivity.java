@@ -1,19 +1,25 @@
 package com.example.facrec;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.hardware.Camera;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.Engine;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,22 +28,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.Manifest;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.content.pm.PackageManager;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.Engine;
-import android.speech.tts.TextToSpeech.OnInitListener;
-import android.content.Intent;
-import android.net.Uri;
-import android.hardware.display.DisplayManager;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.lang.String;
 
 
 
@@ -47,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnUp;
     TextView txtFolder;
 
-    String KEY_TEXTPSS = "TEXTPSS";
     String ProtectedDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles";
     String tmpImgPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles/tmp";
     static final int CUSTOM_DIALOG_ID = 0;
@@ -63,6 +57,40 @@ public class MainActivity extends AppCompatActivity {
     File SelectedFile = null;
     String CurrentFileName = null;
     ImageView img;
+    public enum AllowedPeople {
+        ANYBODY,
+        ALEJANDRO,
+        ANTONIO,
+        ATLANTIDA,
+        JAVIER,
+        CARLOS,
+        CORBAL,
+        CRISTIAN,
+        FERNANDO,
+        GENESIS,
+        GUSTAVO,
+        JOEL,
+        JUANPABLO,
+        INTRUDER
+
+    }
+    private Uri ficheroSalidaUri;
+
+    private org.tensorflow.demo.Classifier classifier;
+    private static final int INPUT_SIZE = 224;
+    private static final int IMAGE_MEAN = 128;
+    private static final float IMAGE_STD = 128.0f;
+    private static final String INPUT_NAME = "input";
+    //private static final String OUTPUT_NAME = "MobilenetV1/Predictions/Softmax";
+    private static final String OUTPUT_NAME = "final_result";
+
+    private static final String MODEL_FILE = "file:///android_asset/graph.pb";
+    private static final String LABEL_FILE = "file:///android_asset/labels.txt";
+
+    private static int TTS_DATA_CHECK = 1;
+    private static int TTS_TAKE_PHOTO = 2;
+    private TextToSpeech tts = null;
+    private boolean ttsIsInit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 btnUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        UnlockedFor = AllowedPeople.ANYBODY;
+
                         ListDir(curFolder.getParentFile());
 
                     }
@@ -121,20 +149,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         SelectedFile = new File(fileList.get(position));
                         CurrentFileName = fileListname.get(position);
-                        if (AllowedPeople.ANYBODY != UnlockedFor){ /* Already unlocked*/
+                        if (CurrentFileName.equalsIgnoreCase(UnlockedFor.toString())){ /* Already unlocked*/
                             if (SelectedFile.isDirectory()){
                                 ListDir(SelectedFile);
                             }else{
-                                Toast.makeText(MainActivity.this, SelectedFile.toString() + " selected",
+                                Toast.makeText(MainActivity.this, "Archivo seleccionado, listo para usar",
                                         Toast.LENGTH_LONG).show();
                                 dismissDialog(CUSTOM_DIALOG_ID);
                             }
                         }else {
                             StartAuthentification();
-
                         }
-
-
                     }
                 });
 
@@ -153,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // display the current directory and files
     void ListDir( File f){
         if(f.equals(root)){
             btnUp.setEnabled(false);
@@ -176,18 +202,18 @@ public class MainActivity extends AppCompatActivity {
 
         lstviewDialog.setAdapter(directoryList);
     }
-    private static int TTS_DATA_CHECK = 1;
-    private static int TTS_TAKE_PHOTO = 2;
-    private TextToSpeech tts = null;
-    private boolean ttsIsInit = false;
-    Bitmap bmp;
+
+    // Initilize the Text to Speech component
     private void initTextToSpeech() {
         Intent intent = new Intent(Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, TTS_DATA_CHECK);
     }
+
+    // Proces the data when activity is completed
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == TTS_DATA_CHECK) {
+            // Verify Text to speech
             if (resultCode == Engine.CHECK_VOICE_DATA_PASS) {
                 tts = new TextToSpeech(this, new OnInitListener() {
                     public void onInit(int status) {
@@ -207,45 +233,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(installVoice);
             }
         }else if (requestCode == TTS_TAKE_PHOTO){
+            // execute the Tensor flow to labe the user image
             if (resultCode == Activity.RESULT_OK)
             {
 
-                //Bundle ext= data.getExtras();
-                //bmp = (Bitmap) ext.get("data");
                 Bitmap test = BitmapFactory.decodeFile(ficheroSalidaUri.getPath());
                 //Bitmap test = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles/Joel/joel.jpg");
 
                 Bitmap otherTest = Bitmap.createScaledBitmap(test, INPUT_SIZE, INPUT_SIZE, false);
 
-
-                //setimage.setImageBitmap(btm00);
-//                previewWidth = test.getWidth();
-//                previewHeight = test.getHeight();
-
-                //final int screenOrientation = getWindowManager().getDefaultDisplay().getRotation();
-
-                //int rotation = getWindowManager().getDefaultDisplay().getRotation();
-                //sensorOrientation = rotation + screenOrientation;
-//                rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
-
-                //img.setImageBitmap(bmp);
-                //img.setImageBitmap(bmp);
- /*               final Canvas canvas = new Canvas(croppedBitmap);
-
-                frameToCropTransform =
-                        org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
-                                previewWidth, previewHeight,
-                                INPUT_SIZE, INPUT_SIZE,
-                                sensorOrientation, MAINTAIN_ASPECT);
-*/                //cropToFrameTransform = new Matrix();
-                //frameToCropTransform.invert(cropToFrameTransform);
-                //rgbFrameBitmap.setPixels(rgbBytes, 0, previewWidth, 0, 0, previewWidth, previewHeight);
-
-                //canvas.drawBitmap(test, frameToCropTransform, null);
-                //org.tensorflow.demo.env.ImageUtils.saveBitmap(croppedBitmap);
-                //final List<org.tensorflow.demo.Classifier.Recognition> result = classifier.recognizeImage(btm00);
- //               org.tensorflow.demo.env.ImageUtils.cropAndRescaleBitmap(test, croppedBitmap, sensorOrientation);
-   //             final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
                 final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(otherTest);
 
                 if (results.get(0).getConfidence() > 0.5){
@@ -254,10 +250,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     ProcesResults("Intruder");
-                    img.setImageBitmap(otherTest);
-                }
 
-                //speak("foto");
+                }
             }
         }
         else{}
@@ -265,12 +259,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+// PLay the text received
     private void speak(String myText) {
         if (tts != null && ttsIsInit) {
             tts.speak(myText, TextToSpeech.QUEUE_ADD, null);
         }
     }
+
     @Override public void onDestroy() {
         if (tts != null) {
             tts.stop();
@@ -279,24 +274,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public enum AllowedPeople {
-        ANYBODY,
-        ALEJANDRO,
-        ANTONIO,
-        ATLANTIDA,
-        JAVIER,
-        CARLOS,
-        CORBAL,
-        CRISTIAN,
-        FERNANDO,
-        GENESIS,
-        GUSTAVO,
-        JOEL,
-        JUANPABLO,
-        INTRUDER
-
-    }
-    private Uri ficheroSalidaUri;
+    // Start Camera activity to register the user
     private void StartAuthentification(){
         AlertDialog.Builder ContinueAuth = new AlertDialog.Builder(this);
         ContinueAuth.setMessage("Necesitas identificarte para acceder al contenido")
@@ -304,11 +282,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // call here the identification process
-                        //ProcesResults();
-                        //CameraActivity.CameraInit();
-                        //FacialRecognition mytest = new FacialRecognition();
-                        //mytest.CameraInit();
+
                         Intent cameraIntent =  new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                         File file = new File(tmpImgPath, "tmp.jpg");
                         ficheroSalidaUri = Uri.fromFile(file);
@@ -320,6 +294,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Cancelar proceso
+                        Toast.makeText(MainActivity.this, "Operacion cancelada",
+                                Toast.LENGTH_LONG).show();
                         dismissDialog(CUSTOM_DIALOG_ID);
                     }
                 });
@@ -327,6 +303,8 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
 
     }
+
+    // Return the enumeration matching the user name
     private AllowedPeople convertToAllowePeople(String myString){
         AllowedPeople myperson = null;
         for (AllowedPeople person : AllowedPeople.values()){
@@ -338,48 +316,32 @@ public class MainActivity extends AppCompatActivity {
         return myperson;
     }
 
+    // Determine if the User is allowed to access the folder
     private void ProcesResults (String autres){
-        //String autres = "Joel";
-
         if (CurrentFileName.equalsIgnoreCase(autres)){
             speak("Bienvenido "+CurrentFileName);
             UnlockedFor = convertToAllowePeople(autres);
+            img.setForeground(getResources().getDrawable(R.drawable.ic_action_ok));
             ListDir(SelectedFile);
         }else if (autres.equalsIgnoreCase(AllowedPeople.INTRUDER.toString())){
             speak("Intruso");
             speak("Intruso");
             speak("Intruso");
+            UnlockedFor = AllowedPeople.ANYBODY;
+            img.setForeground(getResources().getDrawable(R.drawable.ic_action_denied));
+
+            dismissDialog(CUSTOM_DIALOG_ID);
+
         }else{
             speak(autres);
             speak("No tienes permisos para acceder a esta ubicacion");
+            img.setForeground(getResources().getDrawable(R.drawable.ic_action_denied));
+            UnlockedFor = AllowedPeople.ANYBODY;
+
         }
     }
-    private org.tensorflow.demo.Classifier classifier;
-    private static final int INPUT_SIZE = 224;
-    private static final int IMAGE_MEAN = 128;
-    private static final float IMAGE_STD = 128.0f;
-    private static final String INPUT_NAME = "input";
-    //private static final String OUTPUT_NAME = "MobilenetV1/Predictions/Softmax";
-    private static final String OUTPUT_NAME = "final_result";
 
-    private static final String MODEL_FILE = "file:///android_asset/graph.pb";
-    private static final String LABEL_FILE = "file:///android_asset/labels.txt";
-
-    private static final boolean SAVE_PREVIEW_BITMAP = false;
-
-    private static final boolean MAINTAIN_ASPECT = true;
-
-    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
-
-    private int previewWidth = 0;
-    private int previewHeight = 0;
-    private byte[][] yuvBytes;
-    private int[] rgbBytes = null;
-    private Bitmap rgbFrameBitmap = null;
-    private Bitmap croppedBitmap = null;
-    private Matrix frameToCropTransform;
-    private Matrix cropToFrameTransform;
-
+// Initilize the tensor flow model
     public void Init_TF() {
 
         classifier =
@@ -393,39 +355,8 @@ public class MainActivity extends AppCompatActivity {
                         INPUT_NAME,
                         OUTPUT_NAME);
 
-        //resultsView = (org.tensorflow.demo.ResultsView) findViewById(R.id.results);
-        //previewWidth = size.getWidth();
-        //previewHeight = size.getHeight();
-
-        //final Display display = getWindowManager().getDefaultDisplay();
-        //final int screenOrientation = display.getRotation();
-
-        //LOGGER.i("Sensor orientation: %d, Screen orientation: %d", rotation, screenOrientation);
-
-        //sensorOrientation = rotation + screenOrientation;
-
-        //LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
-        //rgbBytes = new int[previewWidth * previewHeight];
-        //rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
-        croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
-
-       /* frameToCropTransform =
-                org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
-                        previewWidth, previewHeight,
-                        INPUT_SIZE, INPUT_SIZE,
-                        sensorOrientation, MAINTAIN_ASPECT);*/
-
-        //cropToFrameTransform = new Matrix();
-        //frameToCropTransform.invert(cropToFrameTransform);
-
-        yuvBytes = new byte[3][];
-
 
     }
-    private Integer sensorOrientation;
-
-
-
 
 }
 
