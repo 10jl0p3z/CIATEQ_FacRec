@@ -5,27 +5,35 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
+    ir-eligibility="METHOD_ADDED"
     plugin-version="3.1.2"
-    timestamp="1530168729325"
+    timestamp="1530251178154"
     token="-1619510592560474169"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="12054" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="1076" />
     <task
         name="verifier"
-        duration="0" />
+        duration="913" />
+
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\instant-run-apk\debug\app-debug.apk"
+        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1530168368814"
+        timestamp="1530248522519"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_6.apk"
@@ -66,7 +74,15 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1530168729325"
-        verifier="COLD_SWAP_REQUESTED" />
+        ir-eligibility="METHOD_ADDED"
+        timestamp="1530251178154"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\lopez\OneDrive\Documentos\GitHub\CIATEQ_FacRec\FacRec\app\gradleBuild\intermediates\instant-run-apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
 
 </instant-run>

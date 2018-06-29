@@ -31,6 +31,7 @@ import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.content.Intent;
 import android.net.Uri;
+import android.hardware.display.DisplayManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -212,33 +213,48 @@ public class MainActivity extends AppCompatActivity {
                 //Bundle ext= data.getExtras();
                 //bmp = (Bitmap) ext.get("data");
                 Bitmap test = BitmapFactory.decodeFile(ficheroSalidaUri.getPath());
+                //Bitmap test = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/ProtectedFiles/Joel/joel.jpg");
+
+                Bitmap otherTest = Bitmap.createScaledBitmap(test, INPUT_SIZE, INPUT_SIZE, false);
 
 
-                previewWidth = test.getWidth();
-                previewHeight = test.getHeight();
-                sensorOrientation = getWindowManager().getDefaultDisplay().getRotation();
+                //setimage.setImageBitmap(btm00);
+//                previewWidth = test.getWidth();
+//                previewHeight = test.getHeight();
+
+                //final int screenOrientation = getWindowManager().getDefaultDisplay().getRotation();
+
+                //int rotation = getWindowManager().getDefaultDisplay().getRotation();
+                //sensorOrientation = rotation + screenOrientation;
+//                rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
+
                 //img.setImageBitmap(bmp);
                 //img.setImageBitmap(bmp);
-                final Canvas canvas = new Canvas(croppedBitmap);
+ /*               final Canvas canvas = new Canvas(croppedBitmap);
 
                 frameToCropTransform =
                         org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
                                 previewWidth, previewHeight,
                                 INPUT_SIZE, INPUT_SIZE,
                                 sensorOrientation, MAINTAIN_ASPECT);
+*/                //cropToFrameTransform = new Matrix();
+                //frameToCropTransform.invert(cropToFrameTransform);
+                //rgbFrameBitmap.setPixels(rgbBytes, 0, previewWidth, 0, 0, previewWidth, previewHeight);
 
-                cropToFrameTransform = new Matrix();
-                frameToCropTransform.invert(cropToFrameTransform);
+                //canvas.drawBitmap(test, frameToCropTransform, null);
+                //org.tensorflow.demo.env.ImageUtils.saveBitmap(croppedBitmap);
+                //final List<org.tensorflow.demo.Classifier.Recognition> result = classifier.recognizeImage(btm00);
+ //               org.tensorflow.demo.env.ImageUtils.cropAndRescaleBitmap(test, croppedBitmap, sensorOrientation);
+   //             final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
+                final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(otherTest);
 
-                canvas.drawBitmap(test, frameToCropTransform, null);
-                org.tensorflow.demo.env.ImageUtils.saveBitmap(croppedBitmap);
-                final List<org.tensorflow.demo.Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
-                img.setImageBitmap(croppedBitmap);
-                if (results.get(0).getConfidence() > 0.7){
+                if (results.get(0).getConfidence() > 0.5){
                     ProcesResults(results.get(0).getTitle());
+                    img.setImageBitmap(otherTest);
                 }
                 else{
                     ProcesResults("Intruder");
+                    img.setImageBitmap(otherTest);
                 }
 
                 //speak("foto");
@@ -247,6 +263,9 @@ public class MainActivity extends AppCompatActivity {
         else{}
 
     }
+
+
+
     private void speak(String myText) {
         if (tts != null && ttsIsInit) {
             tts.speak(myText, TextToSpeech.QUEUE_ADD, null);
@@ -336,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private org.tensorflow.demo.Classifier classifier;
-    private static final int INPUT_SIZE = 250;
+    private static final int INPUT_SIZE = 224;
     private static final int IMAGE_MEAN = 128;
     private static final float IMAGE_STD = 128.0f;
     private static final String INPUT_NAME = "input";
@@ -406,60 +425,6 @@ public class MainActivity extends AppCompatActivity {
     private Integer sensorOrientation;
 
 
-    public void onPreviewSizeChosen_cbk(final Size size, final int rotation) {
-        /*final float textSizePx =
-                TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
-        borderedText = new org.tensorflow.demo.env.BorderedText(textSizePx);
-        borderedText.setTypeface(Typeface.MONOSPACE);*/
-
-        classifier =
-                org.tensorflow.demo.TensorFlowImageClassifier.create(
-                        getAssets(),
-                        MODEL_FILE,
-                        LABEL_FILE,
-                        INPUT_SIZE,
-                        IMAGE_MEAN,
-                        IMAGE_STD,
-                        INPUT_NAME,
-                        OUTPUT_NAME);
-
-        //resultsView = (org.tensorflow.demo.ResultsView) findViewById(R.id.results);
-
-        previewWidth = size.getWidth();
-        previewHeight = size.getHeight();
-
-        final Display display = getWindowManager().getDefaultDisplay();
-        final int screenOrientation = display.getRotation();
-
-        //LOGGER.i("Sensor orientation: %d, Screen orientation: %d", rotation, screenOrientation);
-
-        sensorOrientation = rotation + screenOrientation;
-
-        //LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight);
-        rgbBytes = new int[previewWidth * previewHeight];
-        rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888);
-        croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888);
-
-        frameToCropTransform =
-                org.tensorflow.demo.env.ImageUtils.getTransformationMatrix(
-                        previewWidth, previewHeight,
-                        INPUT_SIZE, INPUT_SIZE,
-                        sensorOrientation, MAINTAIN_ASPECT);
-
-        cropToFrameTransform = new Matrix();
-        frameToCropTransform.invert(cropToFrameTransform);
-
-        yuvBytes = new byte[3][];
-
-        /*addCallback(
-                new OverlayView.DrawCallback() {
-                    @Override
-                    public void drawCallback(final Canvas canvas) {
-                        renderDebug(canvas);
-                    }
-                });*/
-    }
 
 
 }
